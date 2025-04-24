@@ -395,10 +395,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\DTOs\TorneoCreateDto.cs" />
-    <Compile Include="Models\DTOs\TorneoReadDto.cs.cs" />
-    <Compile Include="Models\DTOs\TorneoUpdateDto.cs.cs" />
-    <Compile Include="Models\Torneo.cs" />
     <Compile Include="Handler\TokenValidationHandler.cs" />
     <Compile Include="Models\AdministradorITM.cs">
       <DependentUpon>DB.tt</DependentUpon>

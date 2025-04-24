@@ -6,6 +6,7 @@ using System.Web;
 using System.Data.Entity;  // **Importante: System.Data.Entity para MVC**
 using Parcial3.Models;
 
+
 namespace Parcial3.Data   
 {
     public class ApplicationDbContext : DbContext
@@ -14,6 +15,6 @@ namespace Parcial3.Data
         {
         }
 
-        public DbSet<Torneo> Torneos { get; set; }
+        public DbSet<Torneos> Torneos { get; set; }
     }
 }
