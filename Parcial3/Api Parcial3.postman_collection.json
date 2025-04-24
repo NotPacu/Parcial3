@@ -1,0 +1,247 @@
+{
+    "info": {
+        "_postman_id": "393c11b9-74aa-4aa9-a5af-589d0ff9fa82",
+        "name": "Api Parcial3",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "_exporter_id": "42120431"
+    },
+    "item": [
+        {
+            "name": "Get Torneos",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "auth": {
+                    "type": "bearer",
+                    "bearer": [
+                        {
+                            "key": "token",
+                            "value": "{{token}}",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                    "mode": "formdata",
+                    "formdata": []
+                },
+                "url": {
+                    "raw": "{{base}}{{api}}/torneos/1",
+                    "host": [
+                        "{{base}}{{api}}"
+                    ],
+                    "path": [
+                        "torneos",
+                        "1"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Post Torneos",
+            "request": {
+                "auth": {
+                    "type": "bearer",
+                    "bearer": [
+                        {
+                            "key": "token",
+                            "value": "{{token}}",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\r\n  \"TipoTorneo\": \"Fútbol 5\",\r\n  \"NombreTorneo\": \"Copa Primavera 2025\",\r\n  \"NombreEquipo\": \"Los Halcones\",\r\n  \"ValorInscripcion\": 150,\r\n  \"FechaTorneo\": \"2025-05-10\",\r\n  \"Integrantes\": \"Juan Pérez, Carlos Gómez, Luis Martínez, Andrés Ríos, Diego Torres\"\r\n}\r\n",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{base}}{{api}}/torneos",
+                    "host": [
+                        "{{base}}{{api}}"
+                    ],
+                    "path": [
+                        "torneos"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Put torneos",
+            "request": {
+                "auth": {
+                    "type": "bearer",
+                    "bearer": [
+                        {
+                            "key": "token",
+                            "value": "{{token}}",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "method": "PUT",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\r\n        \"idTorneos\": 2,\r\n        \"idAdministradorITM\": 0,\r\n        \"TipoTorneo\": \"Fútbol 5\",\r\n        \"NombreTorneo\": \"Copa Primavera 2024\",\r\n        \"NombreEquipo\": \"Los Halcones\",\r\n        \"ValorInscripcion\": 0,\r\n        \"FechaTorneo\": \"2025-05-10T00:00:00\",\r\n        \"Integrantes\": \"Juan Pérez, Carlos Gómez, Luis Martínez, Andrés Ríos, Diego Torres\"\r\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{base}}{{api}}/torneos",
+                    "host": [
+                        "{{base}}{{api}}"
+                    ],
+                    "path": [
+                        "torneos"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Put torneos Copy",
+            "request": {
+                "auth": {
+                    "type": "bearer",
+                    "bearer": [
+                        {
+                            "key": "token",
+                            "value": "{{token}}",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "method": "DELETE",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{base}}{{api}}/torneos/1",
+                    "host": [
+                        "{{base}}{{api}}"
+                    ],
+                    "path": [
+                        "torneos",
+                        "1"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Usuario Generico",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\r\n  \"Documento\": \"123456789\",\r\n  \"NombreCompleto\": \"Predro Zapata\",\r\n  \"Usuario\": \"Pedro prueba\",\r\n  \"Clave\": \"miClaveSegura123\"\r\n}\r\n",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{base}}{{api}}/torneos/crearUsuarioDePrueba",
+                    "host": [
+                        "{{base}}{{api}}"
+                    ],
+                    "path": [
+                        "torneos",
+                        "crearUsuarioDePrueba"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Login",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\r\n    \"Usuario\":\"Pedro prueba\",\r\n    \"Clave\":\"miClaveSegura123\"\r\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{base}}{{api}}/auth/login",
+                    "host": [
+                        "{{base}}{{api}}"
+                    ],
+                    "path": [
+                        "auth",
+                        "login"
+                    ]
+                }
+            },
+            "response": []
+        }
+    ],
+    "event": [
+        {
+            "listen": "prerequest",
+            "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "exec": [
+                    ""
+                ]
+            }
+        },
+        {
+            "listen": "test",
+            "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "exec": [
+                    ""
+                ]
+            }
+        }
+    ],
+    "variable": [
+        {
+            "key": "base",
+            "value": "",
+            "type": "string"
+        },
+        {
+            "key": "api",
+            "value": "",
+            "type": "string"
+        },
+        {
+            "key": "token",
+            "value": "",
+            "type": "string"
+        }
+    ]
+}

@@ -395,12 +395,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-
     <Compile Include="Models\DTOs\TorneoCreateDto.cs" />
     <Compile Include="Models\DTOs\TorneoReadDto.cs.cs" />
     <Compile Include="Models\DTOs\TorneoUpdateDto.cs.cs" />
     <Compile Include="Models\Torneo.cs" />
-
     <Compile Include="Handler\TokenValidationHandler.cs" />
     <Compile Include="Models\AdministradorITM.cs">
       <DependentUpon>DB.tt</DependentUpon>
@@ -491,6 +489,7 @@
     <Content Include="Models\DB.edmx.diagram">
       <DependentUpon>DB.edmx</DependentUpon>
     </Content>
+    <Content Include="Api Parcial3.postman_collection.json" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
