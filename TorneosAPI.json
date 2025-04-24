@@ -1,0 +1,320 @@
+{
+    "collection": {
+      "info": {
+        "name": "Torneos API - ITM",
+        "description": "Pruebas para el servicio web de gestión de torneos del ITM",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+      },
+      "item": [
+        {
+          "name": "Autenticación",
+          "item": [
+            {
+              "name": "Obtener Token",
+              "request": {
+                "method": "POST",
+                "url": {
+                  "raw": "http://[TuServidor]/api/auth/login",
+                  "host": [
+                    "[TuServidor]"
+                  ],
+                  "path": [
+                    "api",
+                    "auth",
+                    "login"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"Usuario\": \"usuario_admin\",  \n    \"Clave\": \"clave_admin\"     \n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "description": "Obtiene el token de autenticación para un administrador.",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ]
+              },
+              "response": [],
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Código de estado es 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});",
+                      "",
+                      "pm.test(\"Respuesta contiene el token\", function () {",
+                      "    var jsonData = pm.response.json();",
+                      "    pm.expect(jsonData).to.have.property(\"token\");",
+                      "    pm.environment.set(\"token\", jsonData.token); ",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Torneos",
+          "item": [
+            {
+              "name": "Crear Torneo",
+              "request": {
+                "method": "POST",
+                "url": {
+                  "raw": "http://[TuServidor]/api/torneos",
+                  "host": [
+                    "[TuServidor]"
+                  ],
+                  "path": [
+                    "api",
+                    "torneos"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"idAdministradorITM\": 1,   \n    \"TipoTorneo\": \"Fútbol\",\n    \"NombreTorneo\": \"Torneo Interfacultades\",\n    \"NombreEquipo\": \"Los Cracks\",\n    \"ValorInscripcion\": 100000,\n    \"FechaTorneo\": \"2025-05-10T00:00:00\",\n    \"Integrantes\": \"Jugador1, Jugador2, Jugador3\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "description": "Crea un nuevo torneo."
+              },
+              "response": [],
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Código de estado es 200 o 201\", function () {",
+                      "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+                      "});",
+                      "",
+                      "pm.test(\"Respuesta contiene los datos del torneo\", function () {",
+                      "    var jsonData = pm.response.json();",
+                      "    pm.expect(jsonData).to.have.property(\"idTorneos\");",
+                      "    pm.expect(jsonData).to.have.property(\"NombreTorneo\");",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Consultar Torneos",
+              "request": {
+                "method": "GET",
+                "url": {
+                  "raw": "http://[TuServidor]/api/torneos",
+                  "host": [
+                    "[TuServidor]"
+                  ],
+                  "path": [
+                    "api",
+                    "torneos"
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "description": "Obtiene la lista de todos los torneos."
+              },
+              "response": [],
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Código de estado es 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});",
+                      "",
+                      "pm.test(\"Respuesta es un array\", function () {",
+                      "    pm.expect(pm.response.json()).to.be.an('array');",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            },
+             {
+              "name": "Consultar Torneos por Filtro",
+              "request": {
+                "method": "GET",
+                "url": {
+                  "raw": "http://[TuServidor]/api/torneos/buscar?tipo=Fútbol&nombre=Interfacultades&fecha=2025-05-10",
+                  "host": [
+                    "[TuServidor]"
+                  ],
+                  "path": [
+                    "api",
+                    "torneos",
+                    "buscar"
+                  ],
+                  "query": [
+                    {
+                      "key": "tipo",
+                      "value": "Fútbol"
+                    },
+                    {
+                      "key": "nombre",
+                      "value": "Interfacultades"
+                    },
+                    {
+                      "key": "fecha",
+                      "value": "2025-05-10"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "description": "Consulta torneos por tipo, nombre y/o fecha."
+              },
+              "response": [],
+               "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Código de estado es 200 o 404\", function () {",
+                      "    pm.expect(pm.response.code).to.be.oneOf([200, 404]);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Actualizar Torneo",
+              "request": {
+                "method": "PUT",
+                "url": {
+                  "raw": "http://[TuServidor]/api/torneos/1",
+                  "host": [
+                    "[TuServidor]"
+                  ],
+                  "path": [
+                    "api",
+                    "torneos",
+                    "1"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"NombreEquipo\": \"Los Súper Cracks\",\n    \"ValorInscripcion\": 120000\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "description": "Actualiza un torneo existente."
+              },
+              "response": [],
+               "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Código de estado es 200 o 404\", function () {",
+                      "    pm.expect(pm.response.code).to.be.oneOf([200, 404]);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Eliminar Torneo",
+              "request": {
+                "method": "DELETE",
+                "url": {
+                  "raw": "http://[TuServidor]/api/torneos/1",
+                  "host": [
+                    "[TuServidor]"
+                  ],
+                  "path": [
+                    "api",
+                    "torneos",
+                    "1"
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "description": "Elimina un torneo existente."
+              },
+              "response": [],
+               "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "  pm.test(\"Código de estado es 200 o 404\", function () {",
+                      "    pm.expect(pm.response.code).to.be.oneOf([200, 204, 404]);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
