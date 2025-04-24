@@ -32,7 +32,6 @@ namespace Servicios_Jue.Handler
             HttpStatusCode statusCode;
             string token;
 
-            // determine whether a jwt exists or not
             if (!TryRetrieveToken(request, out token))
             {
                 statusCode = HttpStatusCode.Unauthorized;
@@ -58,7 +57,6 @@ namespace Servicios_Jue.Handler
                     IssuerSigningKey = securityKey
                 };
 
-                // Extract and assign Current Principal and user
                 Thread.CurrentPrincipal = tokenHandler.ValidateToken(token, validationParameters, out securityToken);
                 HttpContext.Current.User = tokenHandler.ValidateToken(token, validationParameters, out securityToken);
 
